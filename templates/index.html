@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hexapod Control</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function sendCommand(command) {
+        $.ajax({
+          type: "POST",
+          url: "/move",
+          data: { command: command },
+          success: function (response) {
+            console.log("Command sent: " + command);
+          },
+          error: function (error) {
+            console.log("Error: " + error);
+          },
+        });
+      }
+    </script>
+  </head>
+  <body>
+    <h1>Hexapod Emergency Response System</h1>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480">
+    <button onclick="sendCommand('forward')">Forward</button>
+    <button onclick="sendCommand('backward')">Backward</button>
+    <button onclick="sendCommand('left')">Left</button>
+    <button onclick="sendCommand('right')">Right</button>
+    <button onclick="sendCommand('stop')">Stop</button>
+  </body>
+</html>
